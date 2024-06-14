@@ -49,4 +49,10 @@ class UserController extends Controller
         $users = $this->userService->getUsersWithPosts();
         return response()->json($users);
     }
+
+    public function getJoinsUsersWithPosts()
+    {
+        $users = $this->userService->getJoinsUsersWithPosts();
+        return response()->json($users);
+    }
 }

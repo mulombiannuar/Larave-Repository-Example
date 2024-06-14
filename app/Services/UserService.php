@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Interfaces\UserRepositoryInterface;
-use App\Models\User;
 
 class UserService
 {
@@ -14,35 +15,40 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
-    public function getAllUsers()
+    public function getAllUsers(): iterable
     {
         return $this->userRepository->all();
     }
 
-    public function getUserById($id)
+    public function getUserById(int $id): object
     {
         return $this->userRepository->find($id);
     }
 
-    public function createUser(array $data)
+    public function createUser(array $data): object
     {
         return $this->userRepository->create($data);
     }
 
-    public function updateUser($id, array $data)
+    public function updateUser(int $id, array $data): bool
     {
         $user = $this->userRepository->find($id);
         return $this->userRepository->update($user, $data);
     }
 
-    public function deleteUser($id)
+    public function deleteUser(int $id): bool
     {
         $user = $this->userRepository->find($id);
         return $this->userRepository->delete($user);
     }
 
-    public function getUsersWithPosts()
+    public function getUsersWithPosts(): iterable
     {
         return $this->userRepository->getUsersWithPosts();
+    }
+
+    public function getJoinsUsersWithPosts(): iterable
+    {
+        return $this->userRepository->getJoinsUsersWithPosts();
     }
 }
